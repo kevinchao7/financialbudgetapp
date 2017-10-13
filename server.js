@@ -32,17 +32,3 @@ app.listen(port);
 
 // passport oauth 2 googlea
 require("./config/passport.js")( passport, db.clients );
-
-
-// app.get('/account', ensureAuthenticated, (req, res)=>{
-//   res.render('account', { user: req.user });
-// });
-//
-// app.get('/login', (req, res)=>{
-//   res.render('login', { user: req.user });
-// });
-//
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) { return next(); }
-//   res.redirect('/login');
-// }
