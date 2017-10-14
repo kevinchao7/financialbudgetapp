@@ -1,0 +1,35 @@
+<h3>
+    Flexible Costs
+    <small>Welcome !</small>
+</h3>
+<div ng-controller="FlexiblecostsController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel">
+                <div class="panel-heading">
+                    List of Flexible Costs
+                    <button class="pull-right">Add</button>
+                </div>
+                <div class="panel-body">
+                    <table class="table table responsive">
+                        <tr>
+                            <th>SNo.</th>
+                            <th>Name of Cost</th>
+                            <th>Amount</th>
+                            <th>Edit</th>
+                        </tr>
+                        <tr ng-repeat="t in list">
+                            <td>{{$index+1}}</td>
+                            <td>{{t.name}}</td>
+                            <td>{{t.amount}}</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
