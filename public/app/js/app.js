@@ -1,16 +1,16 @@
 /*!
- * 
+ *
  * Angle - Bootstrap Admin App + AngularJS
- * 
+ *
  * Version: 3.8
  * Author: @themicon_co
  * Website: http://themicon.co
  * License: https://wrapbootstrap.com/help/licenses
- * 
+ *
  */
 
 // APP START
-// ----------------------------------- 
+// -----------------------------------
 
 (function() {
     'use strict';
@@ -735,7 +735,7 @@
             return pos;
           };
 
-            // Predicts tooltip top position 
+            // Predicts tooltip top position
             // based on the trigger element
             function predictTooltipTop(el) {
               var top = el.offsetTop;
@@ -748,7 +748,7 @@
               return (top - height) - (window.pageYOffset);
             }
 
-            // Predicts tooltip top position 
+            // Predicts tooltip top position
             // based on the trigger element
             function predictTooltipLeft(el) {
               var left = el.offsetLeft;
@@ -882,7 +882,7 @@
         function activate() {
 
           // Line chart
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.lineData = {
             labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -902,7 +902,7 @@
           };
 
           // Bar bipolar
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.barBipolarOptions = {
             high: 10,
@@ -924,7 +924,7 @@
 
 
           // Bar horizontal
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.barHorizontalData = {
             labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -945,7 +945,7 @@
           };
 
           // Smil Animations
-          // ----------------------------------- 
+          // -----------------------------------
 
           // Let's put a sequence number aside so we can use it in the event callbacks
           var seq = 0,
@@ -1033,13 +1033,13 @@
                     easing: 'easeOutQuart'
                   }
                 });
-              } 
+              }
             }
           };
 
 
           // SVG PATH animation
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.pathData = {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -1193,7 +1193,7 @@
         this.load = load;
 
         ////////////////
-      
+
         var opts = {
             get: { method: 'GET', isArray: true }
           };
@@ -2070,7 +2070,7 @@
 
           vm.rendererChanged(0);
           vm.paletteChanged(0);
-          vm.changeSeriesData(0);  
+          vm.changeSeriesData(0);
 
           // Graph 2
 
@@ -2374,7 +2374,7 @@
 /**=========================================================
  * Module: demo-dialog.js
  * Demo for multiple ngDialog Usage
- * - ngDialogProvider for default values not supported 
+ * - ngDialogProvider for default values not supported
  *   using lazy loader. Include plugin in base.js instead.
  =========================================================*/
 
@@ -2391,7 +2391,7 @@
     DialogIntroCtrl.$inject = ['$scope', 'ngDialog', 'tpl'];
     // Called from the route state. 'tpl' is resolved before
     function DialogIntroCtrl($scope, ngDialog, tpl) {
-        
+
         activate();
 
         ////////////////
@@ -2601,7 +2601,7 @@
             console.log('ngDialog closing: ' + $dialog.attr('id'));
           });
         }
-    
+
     } // DialogMainCtrl
 
 
@@ -2650,7 +2650,7 @@
 
 /**=========================================================
  * Module: calendar-ui.js
- * This script handle the calendar demo with draggable 
+ * This script handle the calendar demo with draggable
  * events and events creations
  =========================================================*/
 
@@ -2680,7 +2680,7 @@
           };
         }
     }
-    
+
     datasource.$inject = ['$log', '$timeout'];
     function datasource(console, $timeout) {
 
@@ -2887,7 +2887,7 @@
               ]
             }
           ];
-          
+
           var treedata_geography = [
             {
               label: 'North America',
@@ -2929,31 +2929,31 @@
             }
             return vm.my_data;
           };
-          
+
           var tree;
           // This is our API control variable
           vm.my_tree = tree = {};
           vm.try_async_load = function() {
-            
+
             vm.my_data = [];
             vm.doing_async = true;
-            
+
             // Request tree data via $resource
             var remoteTree = $resource('server/treedata.json');
-            
+
             return remoteTree.get(function(res){
-              
+
               vm.my_data = res.data;
 
               vm.doing_async = false;
-            
+
               return tree.expand_all();
-            
-            // we must return a promise so the plugin 
+
+            // we must return a promise so the plugin
             // can watch when it's resolved
             }).$promise;
           };
-          
+
           // Adds a new branch to the tree
           vm.try_adding_a_branch = function() {
             var b;
@@ -3164,44 +3164,44 @@
           };
 
           vm.demo4 = function() {
-            SweetAlert.swal({   
-              title: 'Are you sure?',   
-              text: 'Your will not be able to recover this imaginary file!',   
-              type: 'warning',   
-              showCancelButton: true,   
-              confirmButtonColor: '#DD6B55',   
+            SweetAlert.swal({
+              title: 'Are you sure?',
+              text: 'Your will not be able to recover this imaginary file!',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#DD6B55',
               confirmButtonText: 'Yes, delete it!',
               closeOnConfirm: false
-            },  function(){  
+            },  function(){
               SweetAlert.swal('Booyah!');
             });
           };
 
           vm.demo5 = function() {
-            SweetAlert.swal({   
-              title: 'Are you sure?',   
-              text: 'Your will not be able to recover this imaginary file!',   
-              type: 'warning',   
-              showCancelButton: true,   
-              confirmButtonColor: '#DD6B55',   
-              confirmButtonText: 'Yes, delete it!',   
-              cancelButtonText: 'No, cancel plx!',   
-              closeOnConfirm: false,   
-              closeOnCancel: false 
-            }, function(isConfirm){  
-              if (isConfirm) {     
-                SweetAlert.swal('Deleted!', 'Your imaginary file has been deleted.', 'success');   
-              } else {     
-                SweetAlert.swal('Cancelled', 'Your imaginary file is safe :)', 'error');   
-              } 
+            SweetAlert.swal({
+              title: 'Are you sure?',
+              text: 'Your will not be able to recover this imaginary file!',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#DD6B55',
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel plx!',
+              closeOnConfirm: false,
+              closeOnCancel: false
+            }, function(isConfirm){
+              if (isConfirm) {
+                SweetAlert.swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
+              } else {
+                SweetAlert.swal('Cancelled', 'Your imaginary file is safe :)', 'error');
+              }
             });
           };
 
           vm.demo6 = function() {
-            SweetAlert.swal({   
-              title: 'Sweet!',   
-              text: 'Here\'s a custom image.',   
-              imageUrl: 'http://oitozero.com/img/avatar.jpg' 
+            SweetAlert.swal({
+              title: 'Sweet!',
+              text: 'Here\'s a custom image.',
+              imageUrl: 'http://oitozero.com/img/avatar.jpg'
             });
           };
         }
@@ -4241,15 +4241,15 @@
               complete: false
             }
             ];
-          
+
           vm.editingTodo = false;
           vm.todo = {};
 
           vm.addTodo = function() {
-            
+
             if( vm.todo.title === '' ) return;
             if( !vm.todo.description ) vm.todo.description = '';
-            
+
             if( vm.editingTodo ) {
               vm.todo = {};
               vm.editingTodo = false;
@@ -4260,7 +4260,7 @@
               vm.todo.description = '';
             }
           };
-          
+
           vm.editTodo = function(index, $event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -4271,7 +4271,7 @@
           vm.removeTodo = function(index/*, $event*/) {
             vm.items.splice(index, 1);
           };
-          
+
           vm.clearAll = function() {
             vm.items = [];
           };
@@ -4493,10 +4493,10 @@
 
         function link(scope, element) {
           var options = element.data();
-          
+
           // old usage support
           options.classInput = element.data('classinput') || options.classInput;
-          
+
           element.filestyle(options);
         }
     }
@@ -4543,7 +4543,7 @@
             if(file)
               reader.readAsDataURL(file);
           };
-          
+
           angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
     }
@@ -5616,7 +5616,7 @@
     function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
 
       // Loading bar transition
-      // ----------------------------------- 
+      // -----------------------------------
       var thBar;
       $rootScope.$on('$stateChangeStart', function() {
           if($('.wrapper > section').length) // check if bar container exists
@@ -5643,7 +5643,7 @@
         ;
     localeConfig.$inject = ['tmhDynamicLocaleProvider'];
     function localeConfig(tmhDynamicLocaleProvider){
-  
+
       tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
       // tmhDynamicLocaleProvider.useStorage('$cookieStore');
 
@@ -5677,11 +5677,11 @@
             'ja': 'Japanese',
             'ko': 'Korean',
             'zh': 'Chinese'};
-          
+
           $rootScope.model = {selectedLocale: 'en'};
-          
+
           $rootScope.$locale = $locale;
-          
+
           $rootScope.changeLocale = tmhDynamicLocale.set;
         }
     }
@@ -5748,7 +5748,7 @@
         ////////////////
 
         function activate() {
-          
+
           vm.folder = {};
           // no filter for inbox
           vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
@@ -5778,7 +5778,7 @@
         return service;
 
         ////////////////
-        
+
         function readMails() {
           var path = 'server/mails.json';
           return $http.get(path).then(function (resp) {
@@ -5926,7 +5926,7 @@
               new google.maps.LatLng(33.790807, -117.835734),
               new google.maps.LatLng(33.787453, -117.835858)
             ];
-          
+
           vm.addMarker = addMarker;
           // we use timeout to wait maps to be ready before add a markers
           $timeout(function(){
@@ -5978,7 +5978,7 @@
           };
 
           ///////////////
-          
+
           function addMarker(map, position) {
             return new google.maps.Marker({
               map: map,
@@ -6015,7 +6015,7 @@
         return directive;
 
         function link(scope, element, attrs) {
-          
+
           var defaultColors = {
               markerColor:  '#23b7e5',      // the marker points
               bgColor:      'transparent',      // the background
@@ -6032,9 +6032,9 @@
                 regionFill:   attrs.regionFill   || defaultColors.regionFill,
                 mapName:      attrs.mapName      || 'world_mill_en'
               };
-          
+
           element.css('height', mapHeight);
-          
+
           VectorMap.init( element , options, scope.seriesData, scope.markersData);
         }
     }
@@ -6139,7 +6139,7 @@
             'US': 839,     // USA
             'SA': 410      // Saudi Arabia
           };
-          
+
           vm.markersData = [
             { latLng:[41.90, 12.45],  name:'Vatican City'          },
             { latLng:[43.73, 7.41],   name:'Monaco'                },
@@ -6176,8 +6176,8 @@
 
     //
     // directives definition
-    // 
-    
+    //
+
     function searchOpen () {
         var directive = {
             controller: searchOpenController,
@@ -6193,13 +6193,13 @@
             restrict: 'A'
         };
         return directive;
-        
+
     }
 
     //
     // Contrller definition
-    // 
-    
+    //
+
     searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
     function searchOpenController ($scope, $element, NavSearch) {
       $element
@@ -6209,7 +6209,7 @@
 
     searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
     function searchDismissController ($scope, $element, NavSearch) {
-      
+
       var inputSelector = '.navbar-form input[type="text"]';
 
       $(inputSelector)
@@ -6218,7 +6218,7 @@
           if (e.keyCode === 27) // ESC
             NavSearch.dismiss();
         });
-        
+
       // click anywhere closes the search
       $(document).on('click', NavSearch.dismiss);
       // dismissable options
@@ -6300,12 +6300,12 @@
 
           // Service usage example
           $timeout(function(){
-            
-            Notify.alert( 
-                'This is a custom message from notify..', 
+
+            Notify.alert(
+                'This is a custom message from notify..',
                 {status: 'success'}
             );
-          
+
           }, 500);
         }
     }
@@ -6494,11 +6494,11 @@
         group: null,
         pos: 'top-center'
     };
-    
+
     $.notify          = notify;
     $.notify.message  = Message;
     $.notify.closeAll = closeAll;
-    
+
     return notify;
 }(jQuery));
 
@@ -6583,7 +6583,7 @@
           vm.account = {};
           // place the message if something goes wrong
           vm.authMsg = '';
-            
+
           vm.register = function() {
             vm.authMsg = '';
 
@@ -6609,7 +6609,7 @@
               vm.registerForm.account_email.$dirty = true;
               vm.registerForm.account_password.$dirty = true;
               vm.registerForm.account_agreed.$dirty = true;
-              
+
             }
           };
         }
@@ -6658,7 +6658,7 @@
         savePanelState( panelId, !$scope[panelId] );
 
       });
-  
+
       // Controller helpers
       function savePanelState(id, state) {
         if(!id) return false;
@@ -6715,7 +6715,7 @@
         function removeElement() {
           var deferred = $q.defer();
           var promise = deferred.promise;
-          
+
           // Communicate event destroying panel
           $scope.$emit(removeEvent, parent.attr('id'), deferred);
           promise.then(destroyMiddleware);
@@ -6898,29 +6898,29 @@
         function activate() {
 
           // PANEL COLLAPSE EVENTS
-          // ----------------------------------- 
+          // -----------------------------------
 
           // We can use panel id name for the boolean flag to [un]collapse the panel
           $scope.$watch('panelDemo1',function(newVal){
-              
+
               console.log('panelDemo1 collapsed: ' + newVal);
 
           });
 
 
           // PANEL DISMISS EVENTS
-          // ----------------------------------- 
+          // -----------------------------------
 
           // Before remove panel
           $scope.$on('panel-remove', function(event, id, deferred){
-            
+
             console.log('Panel #' + id + ' removing');
-            
+
             // Here is obligatory to call the resolve() if we pretend to remove the panel finally
             // Not calling resolve() will NOT remove the panel
             // It's up to your app to decide if panel should be removed or not
             deferred.resolve();
-          
+
           });
 
           // Panel removed ( only if above was resolved() )
@@ -6932,18 +6932,18 @@
 
 
           // PANEL REFRESH EVENTS
-          // ----------------------------------- 
+          // -----------------------------------
 
           $scope.$on('panel-refresh', function(event, id) {
             var secs = 3;
-            
+
             console.log('Refreshing during ' + secs +'s #'+id);
 
             $timeout(function(){
-              // directive listen for to remove the spinner 
+              // directive listen for to remove the spinner
               // after we end up to perform own operations
               $scope.$broadcast('removeSpinner', id);
-              
+
               console.log('Refreshed #' + id);
 
             }, 3000);
@@ -6951,7 +6951,7 @@
           });
 
           // PANELS VIA NG-REPEAT
-          // ----------------------------------- 
+          // -----------------------------------
 
           $scope.panels = [
             {
@@ -7110,7 +7110,7 @@
 
         var directive = {
             restrict: 'EAC',
-            template: 
+            template:
               '<div class="preloader-progress">' +
                   '<div class="preloader-progress-bar" ' +
                        'ng-style="{width: loadCounter + \'%\'}"></div>' +
@@ -7171,7 +7171,7 @@
             // a custom event must be used instead
             var off = scope.$on('$viewContentLoaded', function () {
               viewsLoaded ++;
-              // we know there are at least two views to be loaded 
+              // we know there are at least two views to be loaded
               // before the app is ready (1-index.html 2-app*.html)
               if ( viewsLoaded === 2) {
                 // with resolve this fires only once
@@ -7745,32 +7745,32 @@
               url: '/dashboard',
               title: 'Dashboard',
               templateUrl: helper.basepath('dashboard.html'),
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
+              resolve: helper.resolveFor()
           })
             .state('app.fixedcosts', {
                 url: '/fixed_costs',
                 title: 'Fixed Costs',
                 templateUrl: helper.basepath('fixedcosts.html'),
-                resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
+                resolve: helper.resolveFor()
             })
             .state('app.financialgoals', {
                 url: '/financial_goals',
                 title: 'Financial Goals',
                 templateUrl: helper.basepath('financialgoals.html'),
-                resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
+                resolve: helper.resolveFor()
             })
             .state('app.flexiblecosts', {
                 url: '/flexible_costs',
                 title: 'Flexible Costs',
                 templateUrl: helper.basepath('flexiblecosts.html'),
-                resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
+                resolve: helper.resolveFor()
             })
 
             .state('app.history', {
                 url: '/history',
                 title: 'History',
                 templateUrl: helper.basepath('history.html'),
-                resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons')
+                resolve: helper.resolveFor()
             })
           .state('app.dashboard_v2', {
               url: '/dashboard_v2',
@@ -8725,7 +8725,7 @@
           else {
             filterdata($defer, params);
           }
-          
+
           function filterdata($defer, params) {
             var from = (params.page() - 1) * params.count();
             var to = params.page() * params.count();
@@ -8782,7 +8782,7 @@
           ];
 
           // SELECT ROWS
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.data = data;
 
@@ -8810,7 +8810,7 @@
           };
 
           // EXPORT CSV
-          // -----------------------------------  
+          // -----------------------------------
 
           var data4 = [{name: 'Moroni', age: 50},
               {name: 'Tiancum', age: 43},
@@ -8842,7 +8842,7 @@
 
 
           // SORTING
-          // ----------------------------------- 
+          // -----------------------------------
 
 
 
@@ -8859,13 +8859,13 @@
                   var orderedData = params.sorting() ?
                           $filter('orderBy')(data, params.orderBy()) :
                           data;
-          
+
                   $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
               }
           });
 
           // FILTERS
-          // ----------------------------------- 
+          // -----------------------------------
 
           vm.tableParams2 = new ngTableParams({
               page: 1,            // show first page
@@ -8891,7 +8891,7 @@
           });
 
           // AJAX
-          
+
           var Api = $resource('server/table-data.json');
 
           vm.tableParams5 = new ngTableParams({
@@ -8901,10 +8901,10 @@
               total: 0,           // length of data
               counts: [],         // hide page counts control
               getData: function($defer, params) {
-                  
+
                   // Service using cache to avoid mutiple requests
                   ngTableDataService.getData( $defer, params, Api);
-                  
+
                   /* direct ajax request to api (perform result pagination on the server)
                   Api.get(params.url(), function(data) {
                       $timeout(function() {
@@ -8946,7 +8946,7 @@
         function activate() {
 
           // editable row
-          // ----------------------------------- 
+          // -----------------------------------
           vm.users = [
             {id: 1, name: 'awesome user1', status: 2, group: 4, groupName: 'admin'},
             {id: 2, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
@@ -9015,7 +9015,7 @@
           };
 
           // editable column
-          // ----------------------------------- 
+          // -----------------------------------
 
 
           vm.saveColumn = function(column) {
@@ -9028,7 +9028,7 @@
           };
 
           // editable table
-          // ----------------------------------- 
+          // -----------------------------------
 
           // filter users to show
           vm.filterUser = function(user) {
@@ -9051,7 +9051,7 @@
               if (user.isDeleted) {
                 delete user.isDeleted;
               }
-              // remove new 
+              // remove new
               if (user.isNew) {
                 vm.users.splice(i, 1);
               }
@@ -9067,7 +9067,7 @@
               if (user.isDeleted) {
                 vm.users.splice(i, 1);
               }
-              // mark as not new 
+              // mark as not new
               if (user.isNew) {
                 user.isNew = false;
               }
@@ -9107,7 +9107,7 @@
         function activate() {
 
             // Basic example
-            // ----------------------------------- 
+            // -----------------------------------
 
             vm.gridOptions = {
                 rowHeight: 34,
@@ -9195,7 +9195,7 @@
             };
 
             // Complex example
-            // ----------------------------------- 
+            // -----------------------------------
 
             var data = [];
 
@@ -9324,7 +9324,7 @@
         .run(translateRun)
         ;
     translateRun.$inject = ['$rootScope', '$translate'];
-    
+
     function translateRun($rootScope, $translate){
 
       // Internationalization
@@ -9478,9 +9478,9 @@
                 e.preventDefault();
 
                 if (screenfull.enabled) {
-                  
+
                   screenfull.toggle();
-                  
+
                   // Switch icon indicator
                   if(screenfull.isFullscreen)
                     $(this).children('em').removeClass('fa-expand').addClass('fa-compress');
@@ -9536,7 +9536,7 @@
 
           });
         }
-        
+
         function createLink(uri) {
           var linkId = 'autoloaded-stylesheet',
               oldLink = $('#'+linkId).attr('id', linkId + '-old');
