@@ -1,0 +1,46 @@
+<h3>
+    History
+    <small>Welcome !</small>
+</h3>
+<div ng-controller="ReportsController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel">
+                <div id="container" style="height:500px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-controller="HistoryController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel">
+                <div class="panel-heading">
+                    List of all monthly payments
+                </div>
+                <div class="panel-body">
+                    <table class="table table responsive">
+                        <tr>
+                            <th>SNo.</th>
+                            <th>Month</th>
+                            <th>Total Income</th>
+                            <th>Fixed Costs</th>
+                            <th>Financial Goals</th>
+                            <th>Flexible Costs</th>
+                            <th>Savings</th>
+                        </tr>
+                        <tr ng-repeat="t in list">
+                            <td>{{$index+1}}</td>
+                            <td>{{t.date}}</td>
+                            <td>{{t.totalIncome}}</td>
+                            <td>{{t.fixedcosts}}</td>
+                            <td>{{t.financialgoals}}</td>
+                            <td>{{t.flexiblecosts}}</td>
+                            <td>{{t.savings}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
