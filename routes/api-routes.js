@@ -6,7 +6,34 @@ module.exports = (app,db,passport)=>{
   //   //   res.render('index' , {clients : results });
   //   // });
   // });
+  // app.post('/api/fixedcost',(req,res)=>{
+  //   var query = {};
+  //   if (req.query.clientid) {
+  //     query.clientID = req.query.clientid;
+  //   }
+  //   // Here we add an "include" property to our options in our findAll query
+  //   // We set the value to an array of the models we want to include in a left outer join
+  //   // In this case, just db.Author
+  //   db.fixedcost.findAll({
+  //     where: query,
+  //     include: [db.clients]
+  //   }).then(function(dbPost) {
+  //     res.json(dbPost);
+  //   });
+  // });
 
+  app.get('/api/fixedcost',(req,res)=>{
+    var query = {};
+    if (req.query.clientid) {
+      query.clientid = req.query.clientid;
+    }
+    db.fixedcosts.findAll({
+      where: query,
+      include: [db.clients]
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
 
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile','email'] } ) );
 
