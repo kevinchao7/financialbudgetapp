@@ -1,10 +1,12 @@
 module.exports = (app,db,passport)=>{
 
-  app.get("/",(req,res)=>{
-    db.clients.findAll({}).then((results)=>{
-      res.render('index' , {clients : results });
-    });
-  });
+  // app.get("/",(req,res)=>{
+  //   // res.render('')
+  //   // db.clients.findAll({}).then((results)=>{
+  //   //   res.render('index' , {clients : results });
+  //   // });
+  // });
+
 
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile','email'] } ) );
 
