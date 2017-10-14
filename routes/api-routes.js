@@ -1,16 +1,14 @@
 module.exports = (app,db,passport)=>{
 
   app.get("/",(req,res)=>{
-
     db.clients.findAll({}).then((results)=>{
       res.render('index' , {clients : results });
     });
-
   });
 
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile','email'] } ) );
 
-  app.get('/auth/google/callback', passport.authenticate('google',{failureRedirect : '/signup/'}),(req,res)=>{
+  app.get('/auth/google/callback', passport.authenticate('google',{ failureRedirect : '/signup/'} ),(req,res)=>{
     // successRedirect
     var userData = req.user.dataValues;
     // console.log(userData);
