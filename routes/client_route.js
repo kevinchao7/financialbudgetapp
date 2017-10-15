@@ -1,9 +1,15 @@
 module.exports = (app,db) =>{
-  app.get('/api/client/:clientid',(req,res)=>{
-    db.clients.findOne({ where : {id : req.params.clientid }}).then( (dbResp)=>{ res.json(dbResp) } );
+  // Read client data
+  app.get('/api/client/',(req,res)=>{
+    if (req.user && req.isAuthenticated()){
+      db.clients.findOne({ where : {id : req.user }}).then( (dbResp)=>{ res.json(dbResp) } );
+    }else{
+      res.json({message : 'You are not logged in'});
+    }
   });
+  // Modify Settings
   app.put('/api/client',(req,res)=>{
-    // console.log(req.body);
+    console.log('Update client: ' + JSON.stringify(req.body,null,4));
     db.clients.update(
       {
         monthly_income : req.body.income,
@@ -13,16 +19,16 @@ module.exports = (app,db) =>{
       },
       {
         where:{ google_id :req.body.id }
-      }).then((resp)=>{ res.redirect('/') });
+      }).then((resp)=>{ res.redirect('/profile/') });
   });
-  app.post("/api/client",(req,res)=>{
-    db.clients.create({
-      client_name : req.body.name
-    }).then((resp)=>{
-      res.redirect('/');
-    }).catch((err)=>{
-      console.log('Error Message: ' + err.errors[0].message);
-      res.status(400).redirect('/');
-    });
-  });
+  // app.post("/api/client",(req,res)=>{
+  //   db.clients.create({
+  //     client_name : req.body.name
+  //   }).then((resp)=>{
+  //     res.redirect('/');
+  //   }).catch((err)=>{
+  //     console.log('Error Message: ' + err.errors[0].message);
+  //     res.status(400).redirect('/');
+  //   });
+  // });
 }

@@ -1,11 +1,11 @@
 module.exports = (app,db,passport)=> {return {
   createRoutes : (table,route)=>{
-    app.get(route,passport.authenticate('google'),(req,res)=>{
+    app.get(route,(req,res)=>{
       // Searches for user's fixed costs.
-      // console.log(JSON.stringify(req,null,4));
-      if (req.query.clientid) {
+      console.log(route + ' requested by User ' + req.user + ' authenticated?=>' + req.isAuthenticated());
+      if (req.user && req.isAuthenticated()) {
         var query = {};
-        query.clientid = req.query.clientid;
+        query.clientid = req.user;
         db[table].findAll({
           where: query,
           include: [db.clients]
@@ -15,29 +15,48 @@ module.exports = (app,db,passport)=> {return {
         });
       }
       else{
-        console.log('You did not enter a id.');
-        res.end();
+        ErrorMessage();
       }
     });
 
     app.delete(route + '/:id',(req,res)=>{
-      db[table].destroy({ where : { id : req.params.id } })
-      .then((dbResp)=>{
-        res.json(dbResp);
-      });
+      if (req.user && req.isAuthenticated()){
+        db[table].destroy({ where : { id : req.params.id, clientid : req.user } })
+        .then((dbResp)=>{
+          res.json(dbResp);
+        });
+      }
+      else{
+        ErrorMessage();
+      }
     });
 
     app.put(route + '/:id',(req,res)=>{
-      db[table].update( { where : { id : req.params.id } })
-      .then((dbResp)=>{
-        res.json(dbResp);
-      });
+      if(req.user && req.isAuthenticated()){
+        db[table].update( { where : { id : req.params.id, clientid : req.user } })
+        .then((dbResp)=>{
+          res.json(dbResp);
+        });
+      }else{
+        ErrorMessage();
+      }
     });
 
     app.post(route,(req,res)=>{
-      db[table].create(req.body).then((dbResp)=>{
-        res.json(dbResp);
-      });
+      if(req.user && req.isAuthenticated()){
+        const newItem = req.body;
+        newItem.clientid = req.user;
+        db[table].create(newItem).then((dbResp)=>{
+          res.json(dbResp);
+        });
+      }else{
+        ErrorMessage();
+      }
     });
   }
 }};
+
+
+function ErrorMessage(){
+  res.json({messaged: 'You are not logged in'});
+}

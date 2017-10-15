@@ -2,9 +2,13 @@
 <h3>Hi {{user.client_name}}. Welcome to your profile.</h3>
 {{#if user.monthly_income}}
   <p>Thanks for setting up your account.</p>
+  <p>Monthly Income : {{user.monthly_income}}</p>
+  <p>Phone Number   : {{user.phone_number}}</p>
+  <p>Job Title      : {{user.job_title}}</p>
+  <p>Savings        : {{user.current_savings}}</p>
 {{else}}
   <p>Please set up your account. Enter your financial information.</p>
-  <form class="create-update-form" action="/api/setup?_method=PUT" method="POST">
+  <form class="create-update-form" action="/api/client?_method=PUT" method="POST">
 
     <div class="form-group">
       <label>Monthly Income:</label>

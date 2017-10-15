@@ -10,8 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.2.1",
     "method-override": "^2.3.5",
     "mysql": "^2.10.2",
     "mysql2": "^1.4.2",
