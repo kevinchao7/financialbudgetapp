@@ -1,6 +1,6 @@
 module.exports = (app,db) =>{
   app.get('/api/client/:clientid',(req,res)=>{
-    db.clients.findOne({ where : {id : clientid}).then( (dbResp)=>{ res.json(dbResp) } );
+    db.clients.findOne({ where : {id : req.params.clientid }}).then( (dbResp)=>{ res.json(dbResp) } );
   });
   app.put('/api/client',(req,res)=>{
     // console.log(req.body);

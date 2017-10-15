@@ -15,36 +15,81 @@ module.exports = (passport, clients) => {
   passport.use(new GoogleStrategy({
       clientID     : keys.google.clientID,
       clientSecret : keys.google.clientSecret,
-      callbackURL  : keys.google.callbackURL
+      callbackURL  : keys.google.callbackURL,
+      passReqToCallback : true
     },
-    (request, accessToken, refreshToken, profile, done) => {
+    (req, accessToken, refreshToken, profile, done) => {
       process.nextTick(() => {
-        clients.findOne({
-          where: {
-            'google_id': profile.id
-          }
-        }).then((user)=>{
-          if (user){
-            return done(null, user);
-          }
-          else {
-            // Creates new user
-            var newUser = {
-              google_id : profile.id,
-              email : profile.email,
-              client_name : capFL(profile.name.givenName) + ' ' + capFL(profile.name.familyName)
-            };
-    				clients.create(newUser).then((addedUser,created)=>{
-              if (!addedUser) {
-                  return done(null, false);
-              }
-              if (addedUser) {
-                  return done(null, addedUser);
-              }
-            });
-          }
 
-        });
+        if(!req.user){
+          clients.findOne({'google.id' : profile.id}).then((err,user)=>{
+            if(err)
+              return done(err);
+            if(user){
+              if (!user.google_id){
+                user.token = accessToken;
+                user.client_name = profile.displayName;
+                user.email = profile.emails[0].value;
+                user.save((err)=>{
+                  if(err)
+                    throw err;
+                });
+              }
+              return done(null,user);
+            } else {
+              var newUser = {
+                google_id   : profile.id,
+                token       : accessToken,
+                email       : profile.emails[0].value,
+                client_name : capFL(profile.name.givenName) + ' ' + capFL(profile.name.familyName)
+              };
+              newUser.save((err)=>{
+                if(err)
+                  throw err;
+                return done(null, newUser);
+              })
+            }
+          })
+        } else {
+          var user = req.user;
+          user.google_id   = profile.id;
+          user.token       = accessToken;
+          user.client_name = profile.displayName;
+          user.email       = profile.emails[0].value;
+
+          user.save((err)=>{
+            if (err)
+              throw err;
+            return done(null,user);
+          });
+        }
+
+        // clients.findOne({
+        //   where: {
+        //     'google_id': profile.id
+        //   }
+        // }).then((user)=>{
+        //   if (user){
+        //     return done(null, user);
+        //   }
+        //   else {
+        //     // Creates new user
+        //     var newUser = {
+        //       google_id : profile.id,
+        //       email : profile.email,
+        //       client_name : capFL(profile.name.givenName) + ' ' + capFL(profile.name.familyName)
+        //     };
+    		// 		clients.create(newUser).then((addedUser,created)=>{
+        //       if (!addedUser) {
+        //           return done(null, false);
+        //       }
+        //       if (addedUser) {
+        //           return done(null, addedUser);
+        //       }
+        //     });
+        //   }
+        //
+        // });
       });
     }
   ));

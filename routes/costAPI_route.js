@@ -1,6 +1,6 @@
-module.exports = {
-  createRoutes : (app,db,table,route)=>{
-    app.get(route,(req,res)=>{
+module.exports = (app,db,passport)=> {return {
+  createRoutes : (table,route)=>{
+    app.get(route,passport.authenticate('google'),(req,res)=>{
       // Searches for user's fixed costs.
       // console.log(JSON.stringify(req,null,4));
       if (req.query.clientid) {
@@ -40,4 +40,4 @@ module.exports = {
       });
     });
   }
-}
+}};
