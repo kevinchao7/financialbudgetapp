@@ -1,39 +1,24 @@
+
 module.exports = (app,db,passport)=>{
 
-  // app.get("/",(req,res)=>{
-  //   // res.render('')
-  //   // db.clients.findAll({}).then((results)=>{
-  //   //   res.render('index' , {clients : results });
-  //   // });
-  // });
-  // app.post('/api/fixedcost',(req,res)=>{
+  const costAPI = require('./costAPI_route.js');
+
+  costAPI.createRoutes(app,db,'fixedcosts','/api/fixedcost');
+  costAPI.createRoutes(app,db,'flexspend' ,'/api/flexspend');
+  costAPI.createRoutes(app,db,'goals'      ,'/api/goal');
+
+  // app.get('/api/fixedcost',(req,res)=>{
   //   var query = {};
   //   if (req.query.clientid) {
-  //     query.clientID = req.query.clientid;
+  //     query.clientid = req.query.clientid;
   //   }
-  //   // Here we add an "include" property to our options in our findAll query
-  //   // We set the value to an array of the models we want to include in a left outer join
-  //   // In this case, just db.Author
-  //   db.fixedcost.findAll({
+  //   db.fixedcosts.findAll({
   //     where: query,
   //     include: [db.clients]
-  //   }).then(function(dbPost) {
-  //     res.json(dbPost);
+  //   }).then(function(dbResp) {
+  //     res.json(dbResp);
   //   });
   // });
-
-  app.get('/api/fixedcost',(req,res)=>{
-    var query = {};
-    if (req.query.clientid) {
-      query.clientid = req.query.clientid;
-    }
-    db.fixedcosts.findAll({
-      where: query,
-      include: [db.clients]
-    }).then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
 
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile','email'] } ) );
 
@@ -78,70 +63,3 @@ module.exports = (app,db,passport)=>{
 
   });
 }
-
-//
-//   app.put('/:id',(req,res)=>{
-//
-//     db.burgers.update(
-//       {
-//         devoured : req.body.devoured
-//       },
-//       {
-//         where    : { id : req.params.id }
-//       }
-//     ).then(()=>{res.redirect('/')})
-//
-//   });
-//
-// }
-
-// var express = require("express");
-//
-// var router = express.Router();
-//
-// // Import the model (burger.js) to use its database functions.
-// var burger = require("../models/burger.js");
-//
-// // Create all our routes and set up logic within those routes where required.
-// router.get("/", function(req, res) {
-//   burger.all(function(data) {
-//     var hbsObject = {
-//       burgers: data
-//     };
-//     console.log(hbsObject);
-//     res.render("index", hbsObject);
-//   });
-// });
-//
-// router.post("/", function(req, res) {
-//   burger.create([
-//     "burger_name", "devoured"
-//   ], [
-//     req.body.name, 0 //never devoured when created
-//   ], function() {
-//     res.redirect("/");
-//   });
-// });
-//
-// router.put("/:id", function(req, res) {
-//   var condition = "id = " + req.params.id;
-//
-//   console.log("condition", condition);
-//
-//   burger.update({
-//     devoured: req.body.devoured
-//   }, condition, function() {
-//     res.redirect("/");
-//   });
-// });
-//
-// router.delete("/:id", function(req, res) {
-//   var condition = "id = " + req.params.id;
-//
-//   burger.delete(condition, function() {
-//     res.redirect("/");
-//   });
-// });
-//
-// // Export routes for server.js to use.
-// module.exports = router;
