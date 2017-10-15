@@ -2,6 +2,7 @@ module.exports = {
   createRoutes : (app,db,table,route)=>{
     app.get(route,(req,res)=>{
       // Searches for user's fixed costs.
+      // console.log(JSON.stringify(req,null,4));
       if (req.query.clientid) {
         var query = {};
         query.clientid = req.query.clientid;
@@ -15,6 +16,7 @@ module.exports = {
       }
       else{
         console.log('You did not enter a id.');
+        res.end();
       }
     });
 
