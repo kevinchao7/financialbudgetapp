@@ -31,7 +31,7 @@
   },
   {
     "text": "Settings",
-    "sref": "app.reminders",
+    "sref": "app.reminder",
     "icon": "fa fa-cog",
     "label": "label label-info"
   }

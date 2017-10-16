@@ -36,6 +36,7 @@
             'app.flexiblecostsAdd',
             'app.flexiblecostsEdit',
             'app.history',
+            'app.reminder',
             'app.icons',
             'app.flatdoc',
             'app.notify',
@@ -126,6 +127,12 @@
 
     angular
         .module('app.history', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminder', []);
 })();
 (function() {
     'use strict';
@@ -3325,6 +3332,7 @@
 
     DashboardController.$inject = ['$scope', '$timeout'];
     function DashboardController($scope, $timeout) {
+        console.log("Hi6");
         Highcharts.chart('container', {
             chart: {
                 type: 'bar'
@@ -3630,6 +3638,23 @@
                 data: [1, 3, 4, 3, 3, 5, 4]
             }]
         });
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminder')
+        .controller('ReminderController', ReminderController);
+
+    ReminderController.$inject = ['$scope', '$timeout','$state'];
+    function ReminderController($scope, $timeout,$state) {
+        $scope.hi="Hello yay";
+        $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
+        console.log("Hi7");
+        $scope.login=function(){
+            $state.go('page.login');
+        }
     }
 })();
 (function() {
@@ -7912,6 +7937,12 @@
                 url: '/history',
                 title: 'History',
                 templateUrl: helper.basepath('history.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.reminder', {
+                url: '/settings_tab',
+                title: 'Settings',
+                templateUrl: helper.basepath('reminders.html'),
                 resolve: helper.resolveFor()
             })
           .state('app.dashboard_v2', {
