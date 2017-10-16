@@ -1,14 +1,13 @@
 <h3>
     Flexible Costs
-    <small>Welcome !</small>
 </h3>
 <div ng-controller="FlexiblecostsController">
     <div class="container-fluid">
         <div class="row">
             <div class="panel">
                 <div class="panel-heading">
-                    List of Flexible Costs
-                    <button class="pull-right">Add</button>
+                    <h4>List of Flexible Costs</h4>
+                    <button class="pull-right btn btn-primary">Add</button>
                 </div>
                 <div class="panel-body">
                     <table class="table table responsive">
@@ -23,8 +22,10 @@
                             <td>{{t.name}}</td>
                             <td>{{t.amount}}</td>
                             <td>
-                                <button>Edit</button>
-                                <button>Delete</button>
+                                <button class="btn btn-warning" value="Edit" ng-click="edit(t)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-danger" value="Delete"><i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
                             </td>
                         </tr>
                     </table>

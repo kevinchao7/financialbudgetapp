@@ -1,10 +1,5 @@
 [
   {
-    "text": "Main Navigation",
-    "heading": "true",
-    "translate": "sidebar.heading.HEADER"
-  },
-  {
     "text": "Dashboard",
     "sref": "app.dashboard",
     "icon": "icon-speedometer",
@@ -13,31 +8,31 @@
   {
     "text": "Fixed Costs",
     "sref": "app.fixedcosts",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-money",
     "label": "label label-info"
   },
   {
     "text": "Financial Goals",
     "sref": "app.financialgoals",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-money",
     "label": "label label-info"
   },
   {
     "text": "Flexible Costs",
     "sref": "app.flexiblecosts",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-money",
     "label": "label label-info"
   },
   {
     "text": "History",
     "sref": "app.history",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-bar-chart",
     "label": "label label-info"
   },
   {
     "text": "Settings",
     "sref": "app.reminders",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-cog",
     "label": "label label-info"
   }
 ]

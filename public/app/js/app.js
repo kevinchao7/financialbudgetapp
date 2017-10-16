@@ -27,8 +27,14 @@
             'app.settings',
             'app.dashboard',
             'app.fixedcosts',
+            'app.fixedcostsAdd',
+            'app.fixedcostsEdit',
             'app.financialgoals',
+            'app.financialgoalsAdd',
+            'app.financialgoalsEdit',
             'app.flexiblecosts',
+            'app.flexiblecostsAdd',
+            'app.flexiblecostsEdit',
             'app.history',
             'app.icons',
             'app.flatdoc',
@@ -71,13 +77,49 @@
     'use strict';
 
     angular
+        .module('app.fixedcostsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsEdit', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.financialgoals', []);
 })();
 (function() {
     'use strict';
 
     angular
+        .module('app.financialgoalsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsEdit', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.flexiblecosts', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsEdit', []);
 })();
 (function() {
     'use strict';
@@ -3406,11 +3448,52 @@
         .module('app.fixedcosts')
         .controller('FixedcostsController', FixedcostsController);
 
-    FixedcostsController.$inject = ['$scope', '$timeout'];
-    function FixedcostsController($scope, $timeout) {
+    FixedcostsController.$inject = ['$scope', '$timeout','$state','$cookies' ];
+    function FixedcostsController($scope, $timeout, $state, $cookies ) {
         $scope.hi="Hello yay";
+        $scope.t={};
         $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi");
+        $scope.add=function(){
+            $state.go('app.fixedcostsAdd');
+        };
+        $scope.edit=function(t){
+            $cookies.put('editFixed',t);
+            $state.go('app.fixedcostsEdit');
+        };
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsAdd')
+        .controller('FixedcostsAddController', FixedcostsAddController);
+
+    FixedcostsAddController.$inject = ['$scope', '$timeout','$state' ];
+    function FixedcostsAddController($scope, $timeout, $state ) {
+        $scope.back=function(){
+            $state.go('app.fixedcosts');
+        };
+
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsEdit')
+        .controller('FixedcostsEditController', FixedcostsEditController);
+
+    FixedcostsEditController.$inject = ['$scope', '$timeout','$state' ];
+    function FixedcostsEditController($scope, $timeout, $state ) {
+        $scope.back=function(){
+            $state.go('app.fixedcosts');
+        };
+
+
     }
 })();
 (function() {
@@ -3420,9 +3503,47 @@
         .module('app.financialgoals')
         .controller('FinancialgoalsController', FinancialgoalsController);
 
-    FinancialgoalsController.$inject = ['$scope', '$timeout'];
-    function FinancialgoalsController($scope, $timeout) {
+    FinancialgoalsController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsController($scope, $timeout,$state) {
         $scope.hi="Hello yay";
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+        $scope.add=function(){
+            $state.go('app.financialgoalsAdd');
+        };
+        $scope.edit=function(){
+            $state.go('app.financialgoalsEdit');
+        };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsAdd')
+        .controller('FinancialgoalsAddController', FinancialgoalsAddController);
+
+    FinancialgoalsAddController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsAddController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.financialgoals');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsEdit')
+        .controller('FinancialgoalsEditController', FinancialgoalsEditController);
+
+    FinancialgoalsEditController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsEditController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.financialgoals');
+        };
         $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi");
     }
@@ -3434,11 +3555,48 @@
         .module('app.flexiblecosts')
         .controller('FlexiblecostsController', FlexiblecostsController);
 
-    FlexiblecostsController.$inject = ['$scope', '$timeout'];
-    function FlexiblecostsController($scope, $timeout) {
-        $scope.hi="Hello yay";
+    FlexiblecostsController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsController($scope, $timeout, $state) {
+        $scope.add=function(){
+            $state.go('app.flexiblecostsAdd');
+        };
+        $scope.edit=function(){
+            $state.go('app.flexiblecostsEdit');
+        };
         $scope.list=[{name:"Car loan",amount:"1000"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi3");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsAdd')
+        .controller('FlexiblecostsAddController', FlexiblecostsAddController);
+
+    FlexiblecostsAddController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsAddController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.flexiblecosts');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsEdit')
+        .controller('FlexiblecostsEditController', FlexiblecostsEditController);
+
+    FlexiblecostsEditController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsEditController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.flexiblecosts');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
     }
 })();
 (function() {
@@ -7751,6 +7909,18 @@
                 url: '/fixed_costs',
                 title: 'Fixed Costs',
                 templateUrl: helper.basepath('fixedcosts.html'),
+                resolve:helper.resolveFor()
+            })
+            .state('app.fixedcostsAdd', {
+                url: '/fixed_costs_add',
+                title: 'Fixed Costs',
+                templateUrl: helper.basepath('fixedcostsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.fixedcostsEdit', {
+                url: '/fixed_costs_edit',
+                title: 'Fixed Costs',
+                templateUrl: helper.basepath('fixedcostsEdit.html'),
                 resolve: helper.resolveFor()
             })
             .state('app.financialgoals', {
@@ -7759,13 +7929,36 @@
                 templateUrl: helper.basepath('financialgoals.html'),
                 resolve: helper.resolveFor()
             })
+            .state('app.financialgoalsAdd', {
+                url: '/financial_goals_add',
+                title: 'Financial Goals',
+                templateUrl: helper.basepath('financialgoalsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.financialgoalsEdit', {
+                url: '/financial_goals_edit',
+                title: 'Financial Goals',
+                templateUrl: helper.basepath('financialgoalsEdit.html'),
+                resolve: helper.resolveFor()
+            })
             .state('app.flexiblecosts', {
                 url: '/flexible_costs',
                 title: 'Flexible Costs',
                 templateUrl: helper.basepath('flexiblecosts.html'),
                 resolve: helper.resolveFor()
             })
-
+            .state('app.flexiblecostsAdd', {
+                url: '/flexible_costs_add',
+                title: 'Flexible Costs',
+                templateUrl: helper.basepath('flexiblecostsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.flexiblecostsEdit', {
+                url: '/flexible_costs_edit',
+                title: 'Flexible Costs',
+                templateUrl: helper.basepath('flexiblecostsEdit.html'),
+                resolve: helper.resolveFor()
+            })
             .state('app.history', {
                 url: '/history',
                 title: 'History',
