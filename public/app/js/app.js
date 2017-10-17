@@ -3330,9 +3330,23 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', '$timeout'];
-    function DashboardController($scope, $timeout) {
-        console.log("Hi6");
+    DashboardController.$inject = ['$scope', '$timeout','$http'];
+    function DashboardController($scope, $timeout, $http) {
+        console.log("Hi12");
+        $scope.hit=function() {
+            console.log("inside hit");
+            $http({
+                method: 'GET',
+                url: '/api/client'
+            }).then(function successCallback(response) {
+                console.log(response);
+                // this callback will be called asynchronously
+                // when the response is available
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        };
         Highcharts.chart('container', {
             chart: {
                 type: 'bar'
