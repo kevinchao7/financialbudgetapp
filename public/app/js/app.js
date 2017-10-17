@@ -3342,12 +3342,14 @@
         $scope.logout=function(){
             $state.go('page.login');
         };
+        $scope.user={};
         console.log("Hi12");
             $http({
                 method: 'GET',
                 url: 'https://financialbudgetapp.herokuapp.com/api/client'
             }).then(function successCallback(response) {
                 console.log(response);
+                $scope.user=response.data;
                 // this callback will be called asynchronously
                 // when the response is available
             }, function errorCallback(response) {
@@ -3435,7 +3437,7 @@
                 $state.go("page.login");
             }
             $scope.list=response.data;
-            for(i=0;i<$scope.list.length;i++){
+            for(var i=0;i<$scope.list.length;i++){
                 $scope.sum+=$scope.list[i].cost;
             }
             $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
