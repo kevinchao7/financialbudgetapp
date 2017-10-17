@@ -1,24 +1,26 @@
 <h3>
-    Settings
+    Financial Goals
 </h3>
-<div ng-controller="ReminderController">
+<div ng-controller="FinancialgoalsAddController">
+    <button class="btn btn-primary" ng-click="back()">Back</button>
     <div class="container-fluid">
         <div class="row">
             <div class="panel" id="list">
                 <div class="panel-heading">
-                    <h4>Edit Settings</h4>
-                    <button class="pull-right btn btn-primary" ng-click="edit()">Edit</button>
+                    <h4>Add New Item</h4>
+                    <button class="pull-right btn btn-primary" ng-click="add()">Add</button>
                 </div>
                 <div class="panel-body">
                     <form class="form">
                         <div class="form-group">
-                            <label>Monthly Income</label>
+                            <label>Item Name</label>
                             <input type="text" class="form-control" id="itemName" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label ng-click="login()">Reminder(reminds you when you are about to exhaust your budget)</label>
+                            <label>Amount</label>
                             <input type="number" class="form-control" id="itemAmount" placeholder="Amount">
                         </div>
+                        <button ng-click="submit()" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

@@ -27,9 +27,16 @@
             'app.settings',
             'app.dashboard',
             'app.fixedcosts',
+            'app.fixedcostsAdd',
+            'app.fixedcostsEdit',
             'app.financialgoals',
+            'app.financialgoalsAdd',
+            'app.financialgoalsEdit',
             'app.flexiblecosts',
+            'app.flexiblecostsAdd',
+            'app.flexiblecostsEdit',
             'app.history',
+            'app.reminder',
             'app.icons',
             'app.flatdoc',
             'app.notify',
@@ -71,7 +78,31 @@
     'use strict';
 
     angular
+        .module('app.fixedcostsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsEdit', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.financialgoals', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsEdit', []);
 })();
 (function() {
     'use strict';
@@ -83,7 +114,25 @@
     'use strict';
 
     angular
+        .module('app.flexiblecostsAdd', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsEdit', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.history', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminder', []);
 })();
 (function() {
     'use strict';
@@ -3281,122 +3330,72 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout', 'Colors'];
-    function DashboardController($scope, ChartData, $timeout, Colors) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // EASYPIE
-          // -----------------------------------
-          vm.easyPiePercent = 70;
-          vm.pieOptions = {
-              animate: {
-                  duration: 800,
-                  enabled: true
-              },
-              barColor: Colors.byName('info'),
-              trackColor: 'rgba(200,200,200,0.4)',
-              scaleColor: false,
-              lineWidth: 10,
-              lineCap: 'round',
-              size: 145
-          };
-
-          // SPLINE
-          // -----------------------------------
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
+    DashboardController.$inject = ['$scope', '$timeout'];
+    function DashboardController($scope, $timeout) {
+        console.log("Hi6");
+        Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Historic World Population by Region'
+            },
+            subtitle: {
+                text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+            },
+            xAxis: {
+                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Population (millions)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Year 1800',
+                data: [107, 31, 635, 203, 2]
+            }, {
+                name: 'Year 1900',
+                data: [133, 156, 947, 408, 6]
+            }, {
+                name: 'Year 2012',
+                data: [1052, 954, 4250, 740, 38]
+            }]
+        });
 
 
-          // PANEL REFRESH EVENTS
-          // -----------------------------------
-
-          $scope.$on('panel-refresh', function(event, id) {
-
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-
-              // directive listen for to remove the spinner
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // -----------------------------------
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-
-            console.log('Panel #' + id + ' removing');
-
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
     }
 })();
 (function() {
@@ -3406,11 +3405,52 @@
         .module('app.fixedcosts')
         .controller('FixedcostsController', FixedcostsController);
 
-    FixedcostsController.$inject = ['$scope', '$timeout'];
-    function FixedcostsController($scope, $timeout) {
+    FixedcostsController.$inject = ['$scope', '$timeout','$state','$cookies' ];
+    function FixedcostsController($scope, $timeout, $state, $cookies ) {
         $scope.hi="Hello yay";
+        $scope.t={};
         $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi");
+        $scope.add=function(){
+            $state.go('app.fixedcostsAdd');
+        };
+        $scope.edit=function(t){
+            $cookies.put('editFixed',t);
+            $state.go('app.fixedcostsEdit');
+        };
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsAdd')
+        .controller('FixedcostsAddController', FixedcostsAddController);
+
+    FixedcostsAddController.$inject = ['$scope', '$timeout','$state' ];
+    function FixedcostsAddController($scope, $timeout, $state ) {
+        $scope.back=function(){
+            $state.go('app.fixedcosts');
+        };
+
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.fixedcostsEdit')
+        .controller('FixedcostsEditController', FixedcostsEditController);
+
+    FixedcostsEditController.$inject = ['$scope', '$timeout','$state' ];
+    function FixedcostsEditController($scope, $timeout, $state ) {
+        $scope.back=function(){
+            $state.go('app.fixedcosts');
+        };
+
+
     }
 })();
 (function() {
@@ -3420,9 +3460,47 @@
         .module('app.financialgoals')
         .controller('FinancialgoalsController', FinancialgoalsController);
 
-    FinancialgoalsController.$inject = ['$scope', '$timeout'];
-    function FinancialgoalsController($scope, $timeout) {
+    FinancialgoalsController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsController($scope, $timeout,$state) {
         $scope.hi="Hello yay";
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+        $scope.add=function(){
+            $state.go('app.financialgoalsAdd');
+        };
+        $scope.edit=function(){
+            $state.go('app.financialgoalsEdit');
+        };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsAdd')
+        .controller('FinancialgoalsAddController', FinancialgoalsAddController);
+
+    FinancialgoalsAddController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsAddController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.financialgoals');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.financialgoalsEdit')
+        .controller('FinancialgoalsEditController', FinancialgoalsEditController);
+
+    FinancialgoalsEditController.$inject = ['$scope', '$timeout','$state'];
+    function FinancialgoalsEditController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.financialgoals');
+        };
         $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi");
     }
@@ -3434,11 +3512,48 @@
         .module('app.flexiblecosts')
         .controller('FlexiblecostsController', FlexiblecostsController);
 
-    FlexiblecostsController.$inject = ['$scope', '$timeout'];
-    function FlexiblecostsController($scope, $timeout) {
-        $scope.hi="Hello yay";
+    FlexiblecostsController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsController($scope, $timeout, $state) {
+        $scope.add=function(){
+            $state.go('app.flexiblecostsAdd');
+        };
+        $scope.edit=function(){
+            $state.go('app.flexiblecostsEdit');
+        };
         $scope.list=[{name:"Car loan",amount:"1000"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi3");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsAdd')
+        .controller('FlexiblecostsAddController', FlexiblecostsAddController);
+
+    FlexiblecostsAddController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsAddController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.flexiblecosts');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flexiblecostsEdit')
+        .controller('FlexiblecostsEditController', FlexiblecostsEditController);
+
+    FlexiblecostsEditController.$inject = ['$scope', '$timeout','$state'];
+    function FlexiblecostsEditController($scope, $timeout,$state) {
+        $scope.back=function(){
+            $state.go('app.flexiblecosts');
+        };
+        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        console.log("Hi");
     }
 })();
 (function() {
@@ -3523,6 +3638,23 @@
                 data: [1, 3, 4, 3, 3, 5, 4]
             }]
         });
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminder')
+        .controller('ReminderController', ReminderController);
+
+    ReminderController.$inject = ['$scope', '$timeout','$state'];
+    function ReminderController($scope, $timeout,$state) {
+        $scope.hi="Hello yay";
+        $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
+        console.log("Hi7");
+        $scope.login=function(){
+            $state.go('page.login');
+        }
     }
 })();
 (function() {
@@ -7751,6 +7883,18 @@
                 url: '/fixed_costs',
                 title: 'Fixed Costs',
                 templateUrl: helper.basepath('fixedcosts.html'),
+                resolve:helper.resolveFor()
+            })
+            .state('app.fixedcostsAdd', {
+                url: '/fixed_costs_add',
+                title: 'Fixed Costs',
+                templateUrl: helper.basepath('fixedcostsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.fixedcostsEdit', {
+                url: '/fixed_costs_edit',
+                title: 'Fixed Costs',
+                templateUrl: helper.basepath('fixedcostsEdit.html'),
                 resolve: helper.resolveFor()
             })
             .state('app.financialgoals', {
@@ -7759,17 +7903,46 @@
                 templateUrl: helper.basepath('financialgoals.html'),
                 resolve: helper.resolveFor()
             })
+            .state('app.financialgoalsAdd', {
+                url: '/financial_goals_add',
+                title: 'Financial Goals',
+                templateUrl: helper.basepath('financialgoalsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.financialgoalsEdit', {
+                url: '/financial_goals_edit',
+                title: 'Financial Goals',
+                templateUrl: helper.basepath('financialgoalsEdit.html'),
+                resolve: helper.resolveFor()
+            })
             .state('app.flexiblecosts', {
                 url: '/flexible_costs',
                 title: 'Flexible Costs',
                 templateUrl: helper.basepath('flexiblecosts.html'),
                 resolve: helper.resolveFor()
             })
-
+            .state('app.flexiblecostsAdd', {
+                url: '/flexible_costs_add',
+                title: 'Flexible Costs',
+                templateUrl: helper.basepath('flexiblecostsAdd.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.flexiblecostsEdit', {
+                url: '/flexible_costs_edit',
+                title: 'Flexible Costs',
+                templateUrl: helper.basepath('flexiblecostsEdit.html'),
+                resolve: helper.resolveFor()
+            })
             .state('app.history', {
                 url: '/history',
                 title: 'History',
                 templateUrl: helper.basepath('history.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.reminder', {
+                url: '/settings_tab',
+                title: 'Settings',
+                templateUrl: helper.basepath('reminders.html'),
                 resolve: helper.resolveFor()
             })
           .state('app.dashboard_v2', {
