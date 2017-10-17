@@ -3405,12 +3405,23 @@
         .module('app.fixedcosts')
         .controller('FixedcostsController', FixedcostsController);
 
-    FixedcostsController.$inject = ['$scope', '$timeout','$state','$cookies' ];
-    function FixedcostsController($scope, $timeout, $state, $cookies ) {
+    FixedcostsController.$inject = ['$scope', '$timeout','$state','$http' ];
+    function FixedcostsController($scope, $timeout, $state, $http ) {
         $scope.hi="Hello yay";
         $scope.t={};
         $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
         console.log("Hi");
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/fixedcost'
+        }).then(function successCallback(response) {
+            console.log(response);
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         $scope.add=function(){
             $state.go('app.fixedcostsAdd');
         };
