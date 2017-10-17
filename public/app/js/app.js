@@ -3333,8 +3333,6 @@
     DashboardController.$inject = ['$scope', '$timeout','$http','$rootScope'];
     function DashboardController($scope, $timeout, $http, $rootScope) {
         console.log("Hi12");
-        $scope.hit=function() {
-            console.log("inside hit");
             $http({
                 method: 'GET',
                 url: 'https://financialbudgetapp.herokuapp.com/api/client'
@@ -3346,7 +3344,6 @@
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-        };
         Highcharts.chart('container', {
             chart: {
                 type: 'bar'
@@ -3413,15 +3410,25 @@
 
     FixedcostsController.$inject = ['$scope', '$timeout','$state','$http' ];
     function FixedcostsController($scope, $timeout, $state, $http ) {
-        $scope.hi="Hello yay";
         $scope.t={};
-        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+        $scope.sum=0;
+        $scope.percent=0;
+        $scope.list=[];
         console.log("Hi");
         $http({
             method: 'GET',
             url: 'https://financialbudgetapp.herokuapp.com/api/fixedcost'
         }).then(function successCallback(response) {
             console.log(response);
+            if(response.data.messaged){
+                console.log("error: not logged in");
+                $state.go("page.login");
+            }
+            $scope.list=response.data;
+            for(i=0;i<$scope.list.length;i++){
+                $scope.sum+=$scope.list[i].cost;
+            }
+            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -3479,11 +3486,31 @@
         .module('app.financialgoals')
         .controller('FinancialgoalsController', FinancialgoalsController);
 
-    FinancialgoalsController.$inject = ['$scope', '$timeout','$state'];
-    function FinancialgoalsController($scope, $timeout,$state) {
-        $scope.hi="Hello yay";
-        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
+    FinancialgoalsController.$inject = ['$scope', '$timeout','$state','$http'];
+    function FinancialgoalsController($scope, $timeout,$state,$http) {
+        $scope.t={};
+        $scope.sum=0;
+        $scope.percent=0;
+        $scope.list=[];
         console.log("Hi");
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/goal'
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.data.messaged){
+                console.log("error: not logged in");
+                $state.go("page.login");
+            }
+            $scope.list=response.data;
+            for(i=0;i<$scope.list.length;i++){
+                $scope.sum+=$scope.list[i].cost;
+            }
+            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         $scope.add=function(){
             $state.go('app.financialgoalsAdd');
         };
@@ -3531,8 +3558,31 @@
         .module('app.flexiblecosts')
         .controller('FlexiblecostsController', FlexiblecostsController);
 
-    FlexiblecostsController.$inject = ['$scope', '$timeout','$state'];
-    function FlexiblecostsController($scope, $timeout, $state) {
+    FlexiblecostsController.$inject = ['$scope', '$timeout','$state','$http'];
+    function FlexiblecostsController($scope, $timeout, $state,$http) {
+        $scope.t={};
+        $scope.sum=0;
+        $scope.percent=0;
+        $scope.list=[];
+        console.log("Hi");
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/flexspend'
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.data.messaged){
+                console.log("error: not logged in");
+                $state.go("page.login");
+            }
+            $scope.list=response.data;
+            for(i=0;i<$scope.list.length;i++){
+                $scope.sum+=$scope.list[i].cost;
+            }
+            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         $scope.add=function(){
             $state.go('app.flexiblecostsAdd');
         };

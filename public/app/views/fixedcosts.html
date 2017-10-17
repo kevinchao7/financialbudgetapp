@@ -3,6 +3,9 @@
 </h3>
 <div ng-controller="FixedcostsController">
     <div class="container-fluid">
+        <div>Monthly Income: {{list.client.monthly_income}}</div>
+        <div>Fixed Costs: {{sum}}</div>
+        <div>Fixed Costs (%): {{percent}}%</div>
         <div class="row">
             <div class="panel" id="list">
                 <div class="panel-heading">
@@ -19,8 +22,8 @@
                         </tr>
                         <tr ng-repeat="t in list">
                             <td>{{$index+1}}</td>
-                            <td>{{t.name}}</td>
-                            <td>{{t.amount}}</td>
+                            <td>{{t.item_name}}</td>
+                            <td>{{t.cost}}</td>
                             <td>
                                 <button class="btn btn-warning" value="Edit" ng-click="edit(t)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
