@@ -3339,7 +3339,9 @@
 
     DashboardController.$inject = ['$scope','$state', '$timeout','$http','$rootScope'];
     function DashboardController($scope,$state, $timeout, $http, $rootScope) {
-
+        $scope.logout=function(){
+            $state.go('page.login');
+        };
         console.log("Hi12");
             $http({
                 method: 'GET',
