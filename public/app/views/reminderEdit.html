@@ -3,7 +3,7 @@
 </h3>
 <div ng-controller="RemindereditController">
     <div class="container-fluid">
-        <button class="pull-right btn btn-primary" ng-click="back()">Back</button>
+        <button class="pull-left btn btn-primary" ng-click="back()">Back</button><br/><br/>
         <div class="row">
             <div class="panel" id="list">
                 <div class="panel-heading">
@@ -19,7 +19,7 @@
                             <label ng-click="login()">Reminder(reminds you when you are about to exhaust your budget)</label>
                             <input type="number" class="form-control" id="itemAmount" placeholder="Amount">
                         </div>
-                        <button class="pull-right btn btn-primary" ng-click="submit(this)">Submit</button>
+                        <button class="btn btn-primary" ng-click="submit(this)">Submit</button>
                     </form>
                 </div>
             </div>

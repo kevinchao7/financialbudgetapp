@@ -3,9 +3,21 @@
 </h3>
 <div ng-controller="FixedcostsController">
     <div class="container-fluid">
-        <div>Monthly Income: {{list.client.monthly_income}}</div>
-        <div>Fixed Costs: {{sum}}</div>
-        <div>Fixed Costs (%): {{percent}}%</div>
+        <div class="row text-center">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="btn-lg btn-warning">Monthly Income: <br/>${{list.client.monthly_income}}</div>
+        </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="btn-lg btn-success">Ideal Fixed Costs: <br/>${{list.client.monthly_income/50}}</div>
+            </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="btn-lg btn-primary">Fixed Costs: <br/>${{sum}}</div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="btn-lg btn-danger">Fixed Costs (%): <br/>{{percent}}%</div>
+        </div>
+        </div>
+        <br/>
         <div class="row">
             <div class="panel" id="list">
                 <div class="panel-heading">

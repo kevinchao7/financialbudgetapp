@@ -3663,7 +3663,7 @@
                 type: 'areaspline'
             },
             title: {
-                text: 'Average fruit consumption during one week'
+                text: 'Budget per month'
             },
             legend: {
                 layout: 'vertical',
@@ -3677,13 +3677,7 @@
             },
             xAxis: {
                 categories: [
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
-                    'Sunday'
+                    'January 2017'
                 ],
                 plotBands: [{ // visualize the weekend
                     from: 4.5,
@@ -3693,12 +3687,12 @@
             },
             yAxis: {
                 title: {
-                    text: 'Fruit units'
+                    text: 'Budget'
                 }
             },
             tooltip: {
                 shared: true,
-                valueSuffix: ' units'
+                valueSuffix: '$'
             },
             credits: {
                 enabled: false
@@ -3709,11 +3703,17 @@
                 }
             },
             series: [{
-                name: 'John',
-                data: [3, 4, 3, 5, 4, 10, 12]
+                name: 'Total Income',
+                data: [3000]
             }, {
-                name: 'Jane',
-                data: [1, 3, 4, 3, 3, 5, 4]
+                name: 'Fixed Costs',
+                data: [2900]
+            }, {
+                name: 'Financial Goals',
+                data: [0]
+            }, {
+                name: 'Flexible Costs',
+                data: [0]
             }]
         });
     }
@@ -3725,7 +3725,7 @@
         .module('app.reminder')
         .controller('ReminderController', ReminderController);
 
-    ReminderController.$inject = ['$scope', '$timeout','$state','http'];
+    ReminderController.$inject = ['$scope', '$timeout','$state','$http'];
     function ReminderController($scope, $timeout,$state,$http) {
         $scope.hi="Hello yay";
         $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
@@ -3741,7 +3741,7 @@
         .module('app.reminderEdit')
         .controller('RemindereditController', RemindereditController);
 
-    RemindereditController.$inject = ['$scope', '$timeout','$state','http'];
+    RemindereditController.$inject = ['$scope', '$timeout','$state','$http'];
     function RemindereditController($scope, $timeout,$state,$http) {
 
         $scope.back=function(){
@@ -7953,7 +7953,7 @@
         $locationProvider.html5Mode(false);
 
         // defaults to dashboard
-        $urlRouterProvider.otherwise('/page/login');
+        $urlRouterProvider.otherwise('/app/dashboard');
 
         //
         // Application Routes

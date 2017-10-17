@@ -3,9 +3,21 @@
 </h3>
 <div ng-controller="FlexiblecostsController">
     <div class="container-fluid">
-        <div>Monthly Income: {{list.client.monthly_income}}</div>
-        <div>Fixed Costs: {{sum}}</div>
-        <div>Fixed Costs (%): {{percent}}%</div>
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="btn-lg btn-warning">Monthly Income: <br/>${{list.client.monthly_income}}</div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="btn-lg btn-success">Ideal Flexible Costs: <br/>${{list.client.monthly_income/30}}</div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="btn-lg btn-primary">Flexible Costs: <br/>${{sum}}</div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="btn-lg btn-danger">Flexible Costs (%): <br/>{{percent}}%</div>
+            </div>
+        </div>
+        <br/>
         <div class="row">
             <div class="panel">
                 <div class="panel-heading">
@@ -13,7 +25,7 @@
                     <button class="pull-right btn btn-primary" ng-click="add()">Add</button>
                 </div>
                 <div class="panel-body">
-                    <table class="table table responsive">
+                    <table class="table table-striped table-responsive">
                         <tr>
                             <th>SNo.</th>
                             <th>Name of Cost</th>
