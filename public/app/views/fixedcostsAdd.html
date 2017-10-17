@@ -9,7 +9,6 @@
             <div class="panel" id="list">
                 <div class="panel-heading">
                     <h4>Add New Item</h4>
-                    <button class="pull-right btn btn-primary" ng-click="add()">Add</button>
                 </div>
                 <div class="panel-body">
                     <form class="form">
@@ -21,7 +20,7 @@
                             <label>Amount</label>
                             <input type="number" class="form-control" id="itemAmount" placeholder="Amount">
                         </div>
-                        <button ng-click="submit()" class="btn btn-primary">Submit</button>
+                        <button ng-click="submit(this)" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

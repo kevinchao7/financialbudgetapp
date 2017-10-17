@@ -3352,13 +3352,10 @@
                 type: 'bar'
             },
             title: {
-                text: 'Historic World Population by Region'
-            },
-            subtitle: {
-                text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                text: 'Current Month\'s Budget'
             },
             xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+                categories: ['Total Income', 'Fixed Costs', 'Financial Goals', 'Flexible Costs'],
                 title: {
                     text: null
                 }
@@ -3366,7 +3363,7 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Population (millions)',
+                    text: 'Cost($)',
                     align: 'high'
                 },
                 labels: {
@@ -3374,7 +3371,7 @@
                 }
             },
             tooltip: {
-                valueSuffix: ' millions'
+                valueSuffix: ' $'
             },
             plotOptions: {
                 bar: {
@@ -3398,14 +3395,9 @@
                 enabled: false
             },
             series: [{
-                name: 'Year 1800',
-                data: [107, 31, 635, 203, 2]
-            }, {
-                name: 'Year 1900',
-                data: [133, 156, 947, 408, 6]
-            }, {
-                name: 'Year 2012',
-                data: [1052, 954, 4250, 740, 38]
+                name: 'October 2017',
+                data: [3000, 2900, 0, 0]
+
             }]
         });
 
@@ -3458,7 +3450,9 @@
         $scope.back=function(){
             $state.go('app.fixedcosts');
         };
-
+        $scope.submit=function(t){
+            console.log(t);
+        };
 
     }
 })();
