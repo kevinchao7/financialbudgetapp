@@ -37,6 +37,7 @@
             'app.flexiblecostsEdit',
             'app.history',
             'app.reminder',
+            'app.reminderEdit',
             'app.icons',
             'app.flatdoc',
             'app.notify',
@@ -133,6 +134,12 @@
 
     angular
         .module('app.reminder', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminderEdit', []);
 })();
 (function() {
     'use strict';
@@ -3452,8 +3459,8 @@
         .module('app.fixedcostsAdd')
         .controller('FixedcostsAddController', FixedcostsAddController);
 
-    FixedcostsAddController.$inject = ['$scope', '$timeout','$state' ];
-    function FixedcostsAddController($scope, $timeout, $state ) {
+    FixedcostsAddController.$inject = ['$scope', '$timeout','$state','$http' ];
+    function FixedcostsAddController($scope, $timeout, $state,$http ) {
         $scope.back=function(){
             $state.go('app.fixedcosts');
         };
@@ -3526,13 +3533,14 @@
         .module('app.financialgoalsAdd')
         .controller('FinancialgoalsAddController', FinancialgoalsAddController);
 
-    FinancialgoalsAddController.$inject = ['$scope', '$timeout','$state'];
-    function FinancialgoalsAddController($scope, $timeout,$state) {
+    FinancialgoalsAddController.$inject = ['$scope', '$timeout','$state','$http'];
+    function FinancialgoalsAddController($scope, $timeout,$state,$http) {
         $scope.back=function(){
             $state.go('app.financialgoals');
         };
-        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
-        console.log("Hi");
+        $scope.submit=function(t){
+            console.log(t);
+        };
     }
 })();
 (function() {
@@ -3600,13 +3608,14 @@
         .module('app.flexiblecostsAdd')
         .controller('FlexiblecostsAddController', FlexiblecostsAddController);
 
-    FlexiblecostsAddController.$inject = ['$scope', '$timeout','$state'];
-    function FlexiblecostsAddController($scope, $timeout,$state) {
+    FlexiblecostsAddController.$inject = ['$scope', '$timeout','$state','$http'];
+    function FlexiblecostsAddController($scope, $timeout,$state,$http) {
         $scope.back=function(){
             $state.go('app.flexiblecosts');
         };
-        $scope.list=[{name:"Car loan",amount:"900"},{name:"Health Insurance",amount:"120"}];
-        console.log("Hi");
+        $scope.submit=function(t){
+            console.log(t);
+        };
     }
 })();
 (function() {
@@ -3616,8 +3625,8 @@
         .module('app.flexiblecostsEdit')
         .controller('FlexiblecostsEditController', FlexiblecostsEditController);
 
-    FlexiblecostsEditController.$inject = ['$scope', '$timeout','$state'];
-    function FlexiblecostsEditController($scope, $timeout,$state) {
+    FlexiblecostsEditController.$inject = ['$scope', '$timeout','$state','$http'];
+    function FlexiblecostsEditController($scope, $timeout,$state,$http) {
         $scope.back=function(){
             $state.go('app.flexiblecosts');
         };
@@ -3632,8 +3641,8 @@
         .module('app.history')
         .controller('HistoryController', HistoryController);
 
-    HistoryController.$inject = ['$scope', '$timeout'];
-    function HistoryController($scope, $timeout) {
+    HistoryController.$inject = ['$scope', '$timeout','$http'];
+    function HistoryController($scope, $timeout,$http) {
         $scope.hi="Hello yay";
         $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
         console.log("Hi4");
@@ -3646,8 +3655,8 @@
         .module('app.history')
         .controller('ReportsController', ReportsController);
 
-    ReportsController.$inject = ['$scope', '$timeout'];
-    function ReportsController($scope, $timeout) {
+    ReportsController.$inject = ['$scope', '$timeout','$http'];
+    function ReportsController($scope, $timeout,$http) {
         console.log("Hi5");
         Highcharts.chart('container', {
             chart: {
@@ -3716,14 +3725,28 @@
         .module('app.reminder')
         .controller('ReminderController', ReminderController);
 
-    ReminderController.$inject = ['$scope', '$timeout','$state'];
-    function ReminderController($scope, $timeout,$state) {
+    ReminderController.$inject = ['$scope', '$timeout','$state','http'];
+    function ReminderController($scope, $timeout,$state,$http) {
         $scope.hi="Hello yay";
         $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
-        console.log("Hi7");
-        $scope.login=function(){
-            $state.go('page.login');
-        }
+        $scope.edit=function(){
+            $state.go('app.reminderEdit');
+        };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reminderEdit')
+        .controller('RemindereditController', RemindereditController);
+
+    RemindereditController.$inject = ['$scope', '$timeout','$state','http'];
+    function RemindereditController($scope, $timeout,$state,$http) {
+
+        $scope.back=function(){
+            $state.go('app.reminder');
+        };
     }
 })();
 (function() {
@@ -8012,6 +8035,12 @@
                 url: '/settings_tab',
                 title: 'Settings',
                 templateUrl: helper.basepath('reminders.html'),
+                resolve: helper.resolveFor()
+            })
+            .state('app.reminderEdit', {
+                url: '/settings_edit',
+                title: 'Settings',
+                templateUrl: helper.basepath('reminderEdit.html'),
                 resolve: helper.resolveFor()
             })
           .state('app.dashboard_v2', {
