@@ -21,6 +21,13 @@ module.exports = (app,db) =>{
         where:{ google_id :req.body.id }
       }).then((resp)=>{ res.redirect('/profile/') });
   });
+
+  app.get('/logout/',(req,res)=>{
+    if(req.user && req.isAuthenticated()){
+      req.logout();
+    }
+    res.redirect('/');
+  })
   // app.post("/api/client",(req,res)=>{
   //   db.clients.create({
   //     client_name : req.body.name

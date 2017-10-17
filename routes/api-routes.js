@@ -1,3 +1,4 @@
+const emailAPI = require('./email_api.js');
 module.exports = (app,db,passport)=>{
 
   const costAPI = require('./costAPI_route.js')(app,db,passport);
@@ -24,4 +25,9 @@ module.exports = (app,db,passport)=>{
       res.json({message:'You are not logged in.'});
     }
   });
+
+  // app.get('/api/sendemail/',(req,res)=>{
+  //   emailAPI.sendEmail('hi','kchao562@gmail.com');
+  //   res.end();
+  // });
 }

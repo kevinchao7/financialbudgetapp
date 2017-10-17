@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes)=>{
 
     phone_number :
     {
-      type : DataTypes.INTEGER
+      type : DataTypes.BIGINT
     },
 
     monthly_income :
@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes)=>{
       type : DataTypes.STRING
     },
 
-    principle : // 50/30/20 Principle is default 1
+    reminder :
     {
-      type : DataTypes.INTEGER,
-      defaultValue : 1
+      type : DataTypes.DECIMAL(12,4),
+      defaultValue : 0.9
     },
 
     current_savings :
@@ -53,6 +53,9 @@ module.exports = (sequelize, DataTypes)=>{
       onDelete: "cascade"
     });
     clients.hasMany(models.goals, {
+      onDelete: "cascade"
+    });
+    clients.hasMany(models.histories, {
       onDelete: "cascade"
     });
   };

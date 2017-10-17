@@ -39,10 +39,10 @@ require("./config/passport.js")( passport, db.clients );
 // const exphbs = require("express-handlebars");
 // app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 // app.set("view engine", "handlebars");
-app.use(express.static('public'));
 // app.get('/',(req,res)=>{
 //   res.render('index',{});
 // });
+app.use(express.static('public'));
 
 // Import routes and give the server access to them.
 require("./routes/api-routes.js")(app,db,passport);
