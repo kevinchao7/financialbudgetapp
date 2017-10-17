@@ -3330,8 +3330,8 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', '$timeout','$https'];
-    function DashboardController($scope, $timeout, $https) {
+    DashboardController.$inject = ['$scope', '$timeout','$https','$rootScope'];
+    function DashboardController($scope, $timeout, $https, $rootScope) {
         console.log("Hi12");
         $scope.hit=function() {
             console.log("inside hit");
@@ -3432,7 +3432,7 @@
             $state.go('app.fixedcostsAdd');
         };
         $scope.edit=function(t){
-            $cookies.put('editFixed',t);
+            //$cookies.put('editFixed',t);
             $state.go('app.fixedcostsEdit');
         };
 

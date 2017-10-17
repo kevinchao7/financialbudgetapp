@@ -1050,7 +1050,7 @@ _:-ms-lang(x),
   /* fixes chrome jump */
   margin-bottom: 0;
   border-radius: 0;
-  background-color: #fff;
+  background-color: #f7f2ea;
   z-index: 1050;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -1068,12 +1068,7 @@ _:-ms-lang(x),
   position: relative;
 }
 .topnavbar .navbar-header {
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-  background-image: -o-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-  background-image: linear-gradient(to right, #23b7e5 0%, #51c6ea 100%);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff23b7e5', endColorstr='#ff51c6ea', GradientType=1);
+  background-color: #f7f2ea;
 }
 @media only screen and (min-width: 768px) {
   .topnavbar .navbar-header {
