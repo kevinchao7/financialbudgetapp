@@ -9,12 +9,13 @@ module.exports = (app,db,passport)=>{
   require('./client_route.js')(app,db);
 
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile','email'] } ) );
-  app.get('/auth/google/callback', passport.authenticate('google',{ successRedirect : '/profile/',failureRedirect : '/profile/'} )
+  app.get('/auth/google/callback', passport.authenticate('google',{ successRedirect : '/app/dashboard',failureRedirect : '/app/dashboard'} )
   // ,(req,res)=>{
   //   var userData = req.user.dataValues;
   //   res.render('login',{user : userData});
   // }
   );
+
   app.get('/profile/',(req,res)=>{
     console.log('User '+ req.user +' authenticated? => '+req.isAuthenticated());
     if(req.isAuthenticated()){

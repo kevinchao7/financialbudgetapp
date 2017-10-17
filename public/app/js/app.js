@@ -7861,7 +7861,7 @@
         $locationProvider.html5Mode(false);
 
         // defaults to dashboard
-        $urlRouterProvider.otherwise('/app/dashboard');
+        $urlRouterProvider.otherwise('/page/login');
 
         //
         // Application Routes
@@ -7880,7 +7880,7 @@
               resolve: helper.resolveFor()
           })
             .state('app.fixedcosts', {
-                url: '/fixed_costs',
+                url: '/app/fixed_costs',
                 title: 'Fixed Costs',
                 templateUrl: helper.basepath('fixedcosts.html'),
                 resolve:helper.resolveFor()
