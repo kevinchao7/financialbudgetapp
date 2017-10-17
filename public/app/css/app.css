@@ -1242,11 +1242,11 @@ _:-ms-lang(x),
     transition: all 0.2s;
   }
   .topnavbar .navbar-nav > li > .navbar-text {
-    color: #fff;
+    color: black;
   }
   .topnavbar .navbar-nav > li > a,
   .topnavbar .navbar-nav > .open > a {
-    color: #fff;
+    color: black;
   }
   .topnavbar .navbar-nav > li > a:hover,
   .topnavbar .navbar-nav > .open > a:hover,

@@ -3337,8 +3337,9 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', '$timeout','$http','$rootScope'];
-    function DashboardController($scope, $timeout, $http, $rootScope) {
+    DashboardController.$inject = ['$scope','$state', '$timeout','$http','$rootScope'];
+    function DashboardController($scope,$state, $timeout, $http, $rootScope) {
+
         console.log("Hi12");
             $http({
                 method: 'GET',
