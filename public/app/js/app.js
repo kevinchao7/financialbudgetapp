@@ -3330,12 +3330,12 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', '$timeout','$https','$rootScope'];
-    function DashboardController($scope, $timeout, $https, $rootScope) {
+    DashboardController.$inject = ['$scope', '$timeout','$http','$rootScope'];
+    function DashboardController($scope, $timeout, $http, $rootScope) {
         console.log("Hi12");
         $scope.hit=function() {
             console.log("inside hit");
-            $https({
+            $http({
                 method: 'GET',
                 url: 'https://financialbudgetapp.herokuapp.com/api/client'
             }).then(function successCallback(response) {
