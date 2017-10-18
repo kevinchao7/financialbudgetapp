@@ -3589,11 +3589,7 @@
             }
             $scope.list=response.data;
 
-<<<<<<< HEAD
             for(var i=0;i<$scope.list.length;i++){
-=======
-            for(i=0;i<$scope.list.length;i++){
->>>>>>> a0612745f947d50bab3153fc3c6a8860c9654ea3
                 $scope.sum+=parseFloat($scope.list[i].cost);
             }
 
