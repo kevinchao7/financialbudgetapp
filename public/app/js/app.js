@@ -3504,17 +3504,21 @@
         $scope.sum=0;
         $scope.percent=0;
         $scope.list=[];
+        $scope.monthly=0;
         console.log("Hi");
         $http({
             method: 'GET',
             url: 'https://financialbudgetapp.herokuapp.com/api/goal'
         }).then(function successCallback(response) {
             console.log(response);
+
             if(response.data.messaged){
                 console.log("error: not logged in");
                 $state.go("page.login");
             }
             $scope.list=response.data;
+            $scope.monthly=parseInt($scope.list[0].client.monthly_income);
+            console.log($scope.monthly);
             for(var i=0;i<$scope.list.length;i++){
                 $scope.sum+=parseInt($scope.list[i].cost);
             }
@@ -3589,7 +3593,15 @@
             }
             $scope.list=response.data;
 
+<<<<<<< HEAD
             for(var i=0;i<$scope.list.length;i++){
+=======
+<<<<<<< HEAD
+            for(i=0;i<$scope.list.length;i++){
+=======
+            for(var i=0;i<$scope.list.length;i++){
+>>>>>>> 5d6248a7e2251320466a2d4d7eaec95ed02c9257
+>>>>>>> c45c2fd2a014ccd117770787431f98d997b6d777
                 $scope.sum+=parseFloat($scope.list[i].cost);
             }
 
