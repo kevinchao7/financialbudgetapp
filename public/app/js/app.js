@@ -3504,17 +3504,21 @@
         $scope.sum=0;
         $scope.percent=0;
         $scope.list=[];
+        $scope.monthly=0;
         console.log("Hi");
         $http({
             method: 'GET',
             url: 'https://financialbudgetapp.herokuapp.com/api/goal'
         }).then(function successCallback(response) {
             console.log(response);
+
             if(response.data.messaged){
                 console.log("error: not logged in");
                 $state.go("page.login");
             }
             $scope.list=response.data;
+            $scope.monthly=parseInt($scope.list[0].client.monthly_income);
+            console.log($scope.monthly);
             for(var i=0;i<$scope.list.length;i++){
                 $scope.sum+=parseInt($scope.list[i].cost);
             }
