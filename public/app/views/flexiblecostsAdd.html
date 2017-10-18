@@ -1,7 +1,7 @@
 <h3>
     Flexible Costs
 </h3>
-<div ng-controller="FlexiblecostsAddController">
+<div>
     <button class="btn btn-primary" ng-click="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
     <br/><br/>
     <div class="container-fluid">
@@ -11,16 +11,16 @@
                     <h4>Add New Item</h4>
                 </div>
                 <div class="panel-body">
-                    <form class="form">
+                    <form ng-submit='submit()' ng-controller="FlexiblecostsAddController" class="form">
                         <div class="form-group">
                             <label>Item Name</label>
-                            <input type="text" class="form-control" id="itemName" placeholder="Name">
+                            <input type="text" class="form-control" id="itemName" ng-model='itemName' placeholder="Name">
                         </div>
                         <div class="form-group">
                             <label>Amount</label>
-                            <input type="number" class="form-control" id="itemAmount" placeholder="Amount">
+                            <input type="number" class="form-control" id="itemAmount" ng-model='amount' placeholder="Amount">
                         </div>
-                        <button ng-click="submit(this)" class="btn btn-primary">Submit</button>
+                        <input type="submit" id="submit" value="Submit" />
                     </form>
                 </div>
             </div>
