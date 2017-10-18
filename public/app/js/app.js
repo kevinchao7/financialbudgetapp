@@ -3438,7 +3438,7 @@
             }
             $scope.list=response.data;
             for(var i=0;i<$scope.list.length;i++){
-                $scope.sum+=$scope.list[i].cost;
+                $scope.sum+=parseInt($scope.list[i].cost);
             }
             $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
             // this callback will be called asynchronously
@@ -3516,7 +3516,7 @@
             }
             $scope.list=response.data;
             for(var i=0;i<$scope.list.length;i++){
-                $scope.sum+=$scope.list[i].cost;
+                $scope.sum+=parseInt($scope.list[i].cost);
             }
             $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
         }, function errorCallback(response) {
@@ -3589,7 +3589,11 @@
             }
             $scope.list=response.data;
 
+<<<<<<< HEAD
             for(var i=0;i<$scope.list.length;i++){
+=======
+            for(i=0;i<$scope.list.length;i++){
+>>>>>>> a0612745f947d50bab3153fc3c6a8860c9654ea3
                 $scope.sum+=parseFloat($scope.list[i].cost);
             }
 
@@ -3768,7 +3772,32 @@
 
     RemindereditController.$inject = ['$scope', '$timeout','$state','$http'];
     function RemindereditController($scope, $timeout,$state,$http) {
-
+        $scope.income="";
+        $scope.remind="";
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/client'
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.income=response.data.monthly_income;
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/client'
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.remind=response.data.monthly_income;
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
         $scope.back=function(){
             $state.go('app.reminder');
         };
