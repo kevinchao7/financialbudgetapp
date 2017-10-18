@@ -3588,13 +3588,13 @@
                 $state.go("page.login");
             }
             $scope.list=response.data;
-            for(i=0;i<$scope.list.length;i++){
-                $scope.sum+=$scope.list[i].cost;
-            }
+
             for(var i=0;i<$scope.list.length;i++){
-                $scope.sum+=$scope.list[i].cost;
+                $scope.sum+=parseFloat($scope.list[i].cost);
             }
-            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
+
+            $scope.percent=($scope.sum/
+              parseFloat($scope.list[0].client.monthly_income))/100;
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
