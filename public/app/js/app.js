@@ -3587,9 +3587,9 @@
             }
             $scope.list=response.data;
             for(i=0;i<$scope.list.length;i++){
-                $scope.sum+=$scope.list[i].cost;
+                $scope.sum+=parseFloat($scope.list[i].cost);
             }
-            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
+            $scope.percent=(parseFloat($scope.sum)/parseFloat($scope.list[0].client.monthly_income))/100;
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -3616,9 +3616,26 @@
         $scope.back=function(){
             $state.go('app.flexiblecosts');
         };
-        $scope.submit=function(t){
-            console.log(t);
-        };
+        // $scope.submit=function(t){
+        //     console.log(t);
+        // };
+
+        $http({
+            method: 'POST',
+            url: 'https://financialbudgetapp.herokuapp.com/api/flexspend',
+            data: {
+              item_name : $scope.itemName ,cost : $scope.amount
+            }
+        }).then(function successCallback(response) {
+            console.log(response);
+            if(response.data.messaged){
+                console.log("error: not logged in");
+                $state.go("page.login");
+            }
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
     }
 })();
 (function() {
