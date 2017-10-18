@@ -3522,25 +3522,7 @@
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
-        $http({
-            method: 'GET',
-            url: 'https://financialbudgetapp.herokuapp.com/api/client'
-        }).then(function successCallback(response) {
-            console.log(response);
-            $scope.user=response.data;
-            $scope.monthly=parseInt($scope.list[0].client.monthly_income);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
 
-        console.log($scope.monthly);
-        for(var i=0;i<$scope.list.length;i++){
-            $scope.sum+=parseInt($scope.list[i].cost);
-        }
-        $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
         $scope.add=function(){
             $state.go('app.financialgoalsAdd');
         };
@@ -8021,7 +8003,7 @@
         $locationProvider.html5Mode(false);
 
         // defaults to dashboard
-        $urlRouterProvider.otherwise('/page/login');
+        $urlRouterProvider.otherwise('/app/dashboard');
 
         //
         // Application Routes
