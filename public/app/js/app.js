@@ -3471,6 +3471,7 @@
         };
         $scope.submit=function(t){
             console.log(t);
+            $state.go('app.fixedcosts');
         };
 
     }
@@ -3782,18 +3783,9 @@
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
-        $http({
-            method: 'GET',
-            url: 'https://financialbudgetapp.herokuapp.com/api/client'
-        }).then(function successCallback(response) {
-            console.log(response);
-            $scope.remind=response.data.monthly_income;
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
+        $scope.submit=function(){
+            $state.go('app.reminder');
+        };
         $scope.back=function(){
             $state.go('app.reminder');
         };
