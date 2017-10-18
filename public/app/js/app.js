@@ -3515,7 +3515,7 @@
                 $state.go("page.login");
             }
             $scope.list=response.data;
-            for(i=0;i<$scope.list.length;i++){
+            for(var i=0;i<$scope.list.length;i++){
                 $scope.sum+=$scope.list[i].cost;
             }
             $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
@@ -3588,7 +3588,7 @@
                 $state.go("page.login");
             }
             $scope.list=response.data;
-            for(i=0;i<$scope.list.length;i++){
+            for(var i=0;i<$scope.list.length;i++){
                 $scope.sum+=$scope.list[i].cost;
             }
             $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
