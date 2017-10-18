@@ -5,16 +5,16 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="btn-lg btn-warning">Monthly Income: <br/>${{list.client.monthly_income}}</div>
+                <div class="btn-lg btn-warning">Monthly Income: <br/>${{3000}}</div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="btn-lg btn-success">Ideal Flexible Costs: <br/>${{list.client.monthly_income/30}}</div>
+                <div class="btn-lg btn-success">Ideal Flexible Costs: <br/>${{3000/30}}</div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="btn-lg btn-primary">Flexible Costs: <br/>${{sum}}</div>
+                <div class="btn-lg btn-primary">Flexible Costs: <br/>${{850}}</div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="btn-lg btn-danger">Flexible Costs (%): <br/>{{percent}}%</div>
+                <div class="btn-lg btn-danger">Flexible Costs (%): <br/>{{28.33}}%</div>
             </div>
         </div>
         <br/>
@@ -40,8 +40,8 @@
                             <td>
                                 <button class="btn btn-warning" value="Edit" ng-click="edit(t)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
-                                <button class="btn btn-danger" value="Delete"><i class="fa fa-times" aria-hidden="true"></i>
-                                </button>
+                                <!--<button class="btn btn-danger" value="Delete"><i class="fa fa-times" aria-hidden="true"></i>-->
+                                <!--</button>-->
                             </td>
                         </tr>
                     </table>

@@ -3405,7 +3405,7 @@
             },
             series: [{
                 name: 'October 2017',
-                data: [3000, 2900, 0, 0]
+                data: [3000, 1000,1875,850]
 
             }]
         });
@@ -3517,16 +3517,30 @@
                 $state.go("page.login");
             }
             $scope.list=response.data;
-            $scope.monthly=parseInt($scope.list[0].client.monthly_income);
-            console.log($scope.monthly);
-            for(var i=0;i<$scope.list.length;i++){
-                $scope.sum+=parseInt($scope.list[i].cost);
-            }
-            $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
+
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
+        $http({
+            method: 'GET',
+            url: 'https://financialbudgetapp.herokuapp.com/api/client'
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.user=response.data;
+            $scope.monthly=parseInt($scope.list[0].client.monthly_income);
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+        console.log($scope.monthly);
+        for(var i=0;i<$scope.list.length;i++){
+            $scope.sum+=parseInt($scope.list[i].cost);
+        }
+        $scope.percent=($scope.sum/$scope.list[0].client.monthly_income)/100;
         $scope.add=function(){
             $state.go('app.financialgoalsAdd');
         };
@@ -3673,7 +3687,7 @@
     HistoryController.$inject = ['$scope', '$timeout','$http'];
     function HistoryController($scope, $timeout,$http) {
         $scope.hi="Hello yay";
-        $scope.list=[{date:"January 2017",totalIncome:"3000",fixedcosts:"1400",financialgoals:"800",flexiblecosts:"300",savings:"500"}];
+        $scope.list=[{date:"October 2017",totalIncome:"3000",fixedcosts:"1000",financialgoals:"1875",flexiblecosts:"850",savings:"-725"}];
         console.log("Hi4");
     }
 })();
@@ -3706,7 +3720,7 @@
             },
             xAxis: {
                 categories: [
-                    'January 2017'
+                    'October 2017'
                 ],
                 plotBands: [{ // visualize the weekend
                     from: 4.5,
@@ -3736,13 +3750,13 @@
                 data: [3000]
             }, {
                 name: 'Fixed Costs',
-                data: [2900]
+                data: [1000]
             }, {
                 name: 'Financial Goals',
-                data: [0]
+                data: [1875]
             }, {
                 name: 'Flexible Costs',
-                data: [0]
+                data: [850]
             }]
         });
     }
